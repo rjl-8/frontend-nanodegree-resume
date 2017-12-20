@@ -15,6 +15,14 @@ var bio = {
     skills: ["breathing", "eating", "speaking", "being"],
     biopic: "images/197x148.gif",
 
+
+    displayContactInfo: function(dest) {
+        $(dest).append(HTMLmobile.replace("%data%", this.contacts.mobile));
+        $(dest).append(HTMLemail.replace("%data%", this.contacts.email));
+        $(dest).append(HTMLtwitter.replace("%data%", this.contacts.twitter));
+        $(dest).append(HTMLgithub.replace("%data%", this.contacts.github));
+        $(dest).append(HTMLlocation.replace("%data%", this.contacts.location));
+    },
     display: function() {
         //  header
         //  ******
@@ -25,12 +33,7 @@ var bio = {
         $("#header").prepend(formattedName);
 
         //  topContacts
-        //  ***********
-        $("#topContacts").append(HTMLmobile.replace("%data%", this.contacts.mobile));
-        $("#topContacts").append(HTMLemail.replace("%data%", this.contacts.email));
-        $("#topContacts").append(HTMLtwitter.replace("%data%", this.contacts.twitter));
-        $("#topContacts").append(HTMLgithub.replace("%data%", this.contacts.github));
-        $("#topContacts").append(HTMLlocation.replace("%data%", this.contacts.location));
+        this.displayContactInfo("#topContacts");
 
         $("#header").append(HTMLbioPic.replace("%data%", this.biopic));
         $("#header").append(HTMLwelcomeMsg.replace("%data%", this.welcomeMessage));
@@ -41,8 +44,11 @@ var bio = {
                 $("#skills").append(HTMLskills.replace("%data%", elem));
             });
         }
+
+        //  footerContacts
+        this.displayContactInfo("#footerContacts");
     }
-}
+};
 
 bio.display();
 
@@ -101,7 +107,7 @@ var education = {
             }
         }
     }
-}
+};
 
 education.display();
 
@@ -127,12 +133,12 @@ var work = {
             var $workDiv = $(HTMLworkStart);
             $($workDiv).append(HTMLworkEmployer.replace("%data%", this.jobs[i].employer) + HTMLworkTitle.replace("%data%", this.jobs[i].title));
             $($workDiv).append(HTMLworkDates.replace("%data%", this.jobs[i].dates));
-            $($workDiv).append(HTMLworkLocation.replace("%data%", this.jobs[i].city));
+            $($workDiv).append(HTMLworkLocation.replace("%data%", this.jobs[i].location));
             $($workDiv).append(HTMLworkDescription.replace("%data%", this.jobs[i].description));
             $("#workExperience").append($workDiv);
         }
     }
-}
+};
 
 work.display();
 
@@ -179,7 +185,7 @@ var projects = {
             $("#projects").append($taskDiv);
         }
     }
-}
+};
 
 projects.display();
 
